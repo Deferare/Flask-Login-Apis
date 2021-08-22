@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+       function logout() {
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    FB.logout(function (response) {});
+                }
+            });
+            location.replace("/logout");
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Welcome To Index </h1>
+            <p>Example Use Flask</p>
+        </div>
+        {% if current_user.is_authenticated %}
+             {% if FBuser == "" %}
+                  <p>Hi {{ current_user.id }}!</p>
+              {% else %}
+                  <p>Hi {{ FBuser }}!</p>
+             {% endif %}
+        {% endif %}
+        <button type="button" onclick="logout();" class="btn btn-default"> Logout</button>
+    </div>
+</body>
+</html>
